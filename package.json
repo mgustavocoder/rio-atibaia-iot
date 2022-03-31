@@ -10,7 +10,7 @@
     "init": "npm install && npm run prepare",
     "start": "npx tsc && node --es-module-specifier-resolution=node --require dotenv/config dist/src/app.js",
     "lint": "npx eslint src/**/*.ts",
-    "test": "jest ./tests --runInBand",
+    "test": "npx jest ./tests --runInBand",
     "test:coverage": "jest ./tests --coverage --no-cache",
     "test:watch": "jest ./tests --watch",
     "prepare": "husky install"
