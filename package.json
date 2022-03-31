@@ -8,8 +8,7 @@
   },
   "scripts": {
     "init": "npm install && npm run prepare",
-    "start:dev": "npx tsc && node --es-module-specifier-resolution=node --require dotenv/config dist/src/app.js dotenv_config_path=.env.dev",
-    "start:prod": "npx tsc && node --es-module-specifier-resolution=node --require dotenv/config dist/src/app.js dotenv_config_path=.env.prod",
+    "start": "npx tsc && node --es-module-specifier-resolution=node --require dotenv/config dist/src/app.js",
     "lint": "npx eslint src/**/*.ts",
     "test": "jest ./tests --runInBand",
     "test:coverage": "jest ./tests --coverage --no-cache",
@@ -23,6 +22,7 @@
   "devDependencies": {
     "@types/jest": "27.4.0",
     "@types/pino": "7.0.5",
+    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "5.12.0",
     "@typescript-eslint/parser": "5.12.0",
     "eslint": "7.32.0",
@@ -39,6 +39,8 @@
   "dependencies": {
     "axios": "^0.26.1",
     "dotenv": "16.0.0",
+    "env-var": "^7.1.1",
+    "mqtt": "^4.3.7",
     "pino": "7.7.0"
   }
 }

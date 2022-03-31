@@ -1,18 +1,14 @@
-# .
+# Rio Atibaia IOT
+Fetch telemetrics data from the Atibaia River from the website of the Sistema de Alerta a Inundações de São Paulo (SAISP), transforms this data into messages with rain information and river flow and then sends these messages to an MQTT message broker, so that it is possible to use these data in dashboards and MQTT clients.
 
-## Tooling
-- Jest for tests.
-- Eslint with standard shareable config for lint.
-- Husky as pre-commit checker (test, lint, audit).
-- dotenv with **Dev** and **Prod** env files.
-- Dockerfile
-- VSCode Debbuger
-- Github Actions Quality Check (test, lint, audit)
+Monitored sensors:
+- Rio Atibaia Captação Valinhos - Valinhos
+- Rio Atibaia em Desembargador Furtado - Campinas
 
 ## Running locally
 - Requires node ^16.0.0
 - npm run init
-- npm run start:dev
+- npm run start
 
 ## Running in docker
 - Build the image:

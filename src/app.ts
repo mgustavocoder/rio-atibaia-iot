@@ -1,31 +1,30 @@
 import axios from 'axios'
-import dataSource from './data-source'
 import logger from './logger'
+import MQTTClient from './mqtt-client'
+import TelemetryDataFetcher from './telemetry-data-fetcher'
+import TelemetryDataPublisher from './telemetry-data-publisher'
 
+// TODO: Lambda function
+// TODO: Create infra with sam
+// TODO: Create infra with terraform
+// TODO: Create CI/CD pipeline
+// TODO: Diagram in the README with mermaid
 export async function run () {
-  const sensors = []
-  for await (let source of dataSource) {
-    const { status, data } = await axios.get(source.url)
-    if (status === 200) {
-      const dataSlice = data.split(';').splice(11, 10)
-      const rain = dataSlice[3]
-      const flow = dataSlice[5]
+  const mqttClient = new MQTTClient(logger)
+  try {
+    await mqttClient.connect()
+    const fetcher = new TelemetryDataFetcher(logger, axios)
+    const publisher = new TelemetryDataPublisher(logger, mqttClient)
 
-      sensors.push({
-        description: 'Rain Gauge',
-        code: `${source.code}-PLU`,
-        value: parseFloat(('0' + rain).replace(',', '.'))
-      })
-
-      sensors.push({
-        description: 'Flow Meter',
-        code: `${source.code}-Q`,
-        value: parseFloat('0' + flow.replace(',', '.'))
-      })
-    }
+    const telemetryData = await fetcher.fetchData()
+    await publisher.publishData(telemetryData)
+  } catch (error) {
+    logger.error(`Error to execute the job: ${error}`)
+  } finally {
+    await mqttClient.end()
+    logger.info('Job ended.')
+    process.exit(0)
   }
-
-  logger.info(`Sensors - ${JSON.stringify(sensors)}`)
 }
 
 run()

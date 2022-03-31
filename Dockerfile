@@ -1,9 +1,10 @@
 FROM node:16-alpine
 
-WORKDIR /boilerplate-typescript
+WORKDIR /rio-atibaia-iot
 
-COPY . /boilerplate-typescript
+COPY . /rio-atibaia-iot
 
 RUN npm install
+RUN npm run init
 
-ENTRYPOINT [ "node", "--es-module-specifier-resolution=node", "dist/src/app.js" ]
+ENTRYPOINT [ "npm", "run", "start" ]
