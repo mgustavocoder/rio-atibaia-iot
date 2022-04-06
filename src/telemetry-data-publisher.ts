@@ -26,7 +26,9 @@ export default class TelemetryDataPublisher {
     await this.mqttClient.publish(flowTimeTopic, data.flowMeter.dateTime)
     const flowTopic = `${TOPIC}/flow/${data.flowMeter.locationCode}`
     await this.mqttClient.publish(flowTopic, data.flowMeter.value)
-    this.logger.info(`Published rain data to MQTT: topic ${rainTopic} date: ${data.rainGauge.dateTime} value: ${data.rainGauge.value}`)
+    this.logger.info(`Published rain data to MQTT: topic ${rainTopic} value: ${data.rainGauge.value}`)
     this.logger.info(`Published flow data to MQTT: topic ${flowTopic} date: ${data.flowMeter.dateTime} value: ${data.flowMeter.value}`)
+    this.logger.info(`Published rain date to MQTT: topic ${rainTimeTopic} date: ${data.rainGauge.dateTime}`)
+    this.logger.info(`Published flow date to MQTT: topic ${flowTimeTopic} date: ${data.flowMeter.dateTime}`)
   }
 }
