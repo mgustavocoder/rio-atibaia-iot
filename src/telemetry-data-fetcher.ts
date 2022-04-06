@@ -1,3 +1,4 @@
+import { replaceBrMonth } from './helper'
 import dataSource from './data-source'
 
 export default class TelemetryDataFetcher {
@@ -26,7 +27,10 @@ export default class TelemetryDataFetcher {
     return fetchResponse.map((response: any, index: any) => {
       this.logger.trace(response.data)
       const dataSlice = response.data.split(';').splice(11, 10)
-      const dateTime = new Date(dataSlice[2].replace('\n', '').replace('"', '').replace('"', '')).toISOString()
+      let date = dataSlice[2].replace('\n', '').replace('"', '').replace('"', '')
+      date = replaceBrMonth(date)
+      const dateTime = new Date(date).toISOString()
+      this.logger.debug(dateTime)
       const rain = dataSlice[3]
       const flow = dataSlice[5]
       return {
