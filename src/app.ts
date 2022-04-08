@@ -4,9 +4,6 @@ import MQTTClient from './mqtt-client'
 import TelemetryDataFetcher from './telemetry-data-fetcher'
 import TelemetryDataPublisher from './telemetry-data-publisher'
 
-// TODO: Lambda function
-// TODO: Create infra with sam
-// TODO: Create infra with terraform
 // TODO: Create CI/CD pipeline
 // TODO: Diagram in the README with mermaid
 export async function run () {
