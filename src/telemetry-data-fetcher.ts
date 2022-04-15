@@ -28,8 +28,9 @@ export default class TelemetryDataFetcher {
       this.logger.trace(response.data)
       const dataSlice = response.data.split(';').splice(11, 10)
       let date = dataSlice[2].replace('\n', '').replace('"', '').replace('"', '')
+      this.logger.debug(`Date: ${date}`)
       date = replaceBrMonth(date)
-      const dateTime = new Date(date).toISOString()
+      const dateTime = new Date(date).toLocaleString()
       this.logger.debug(dateTime)
       const rain = dataSlice[3]
       const flow = dataSlice[5]

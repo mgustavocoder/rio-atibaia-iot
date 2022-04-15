@@ -6,7 +6,7 @@
     "configurations": [
         {
             "type": "pwa-node",
-            "runtimeVersion": "16.13.0",
+            "runtimeVersion": "14.18.1",
             "request": "launch",
             "name": "Debugger",
             "outputCapture" : "std",

@@ -6,4 +6,5 @@ export const replaceBrMonth = (date: string) => {
   if (date.indexOf('SET') > -1) return date.replace('SET', 'SEP')
   if (date.indexOf('OUT') > -1) return date.replace('OUT', 'OCT')
   if (date.indexOf('DEZ') > -1) return date.replace('DEZ', 'DEC')
+  return date
 }
