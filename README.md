@@ -6,7 +6,7 @@ Monitored sensors:
 - Rio Atibaia em Desembargador Furtado - Campinas
 
 ## Running locally
-- Requires node ^16.0.0
+- Requires node ^14.0.0
 - npm run init
 - npm run start
 
