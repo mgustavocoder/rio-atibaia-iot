@@ -8,8 +8,8 @@ env:
   AWS_REGION: us-east-1
 
 jobs:
-  build-image:
-    name: Build Image
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -27,7 +27,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
-      id: build-image
+      id: build
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
@@ -40,6 +40,7 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    needs: build
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -48,6 +49,9 @@ jobs:
         working-directory: ./terraform/aws
 
     steps:
+    - name: ssh
+    - run: cd ~/.ssh 
+    - run: echo ${{ secrets.ID_RSA_PUB }} >> id_rsa.pub
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
