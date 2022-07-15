@@ -4,7 +4,7 @@
   "description": "Rio Atibaia Iot.",
   "type": "module",
   "engines": {
-    "node": "14.18.1"
+    "node": ">14.18.1"
   },
   "scripts": {
     "init": "npm install && npm run prepare",
